@@ -1,32 +1,23 @@
-import {makeObservable, observable} from "mobx";
+import {makeAutoObservable, makeObservable, observable, runInAction} from "mobx";
+
+
+const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev environment
 
 export default class CourseStore {
+    courses = [
+        "loading courses..."
+    ];
+
     constructor() {
-        makeObservable(this, {
-            courses: observable,
-        })
+        makeAutoObservable(this,{},{autoBind:true});
+        this.fetchCourses();
     }
 
-    courses = [
-        {
-            name: "Devops",
-            maxcap: 50,
-            id: "62582",
-            time: "08:00 - 12:00",
-            weekday: "Tuesday",
-        },
-        {
-            name: "Programming in cpp",
-            maxcap: 250,
-            id: "02393",
-            time: "18:00 - 22:00",
-            weekday: "Tuesday",
-        },
-        {
-            name: "Network Security",
-            maxcap: 15,
-            id: "62530",
-            time: "13:00 - 17:00",
-            weekday: "Monday",
-        }]
+    fetchCourses () {
+        fetch(baseUrl + "rest/courses").then(
+            (response) => response.json().then(
+                (json) => runInAction(()=>this.courses=json)
+            )
+        )
+    }
 }
