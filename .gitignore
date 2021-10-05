@@ -1,2 +1,18 @@
 # Project exclude paths
 /target/
+/src/main/webapp/static/js/2.06676655.chunk.js
+/src/main/webapp/static/js/2.06676655.chunk.js.LICENSE.txt
+/src/main/webapp/static/js/2.06676655.chunk.js.map
+/src/main/webapp/asset-manifest.json
+/src/main/webapp/favicon.ico
+/src/main/webapp/index.html
+/src/main/webapp/logo192.png
+/src/main/webapp/logo512.png
+/src/main/webapp/static/css/main.1e83772d.chunk.css
+/src/main/webapp/static/css/main.1e83772d.chunk.css.map
+/src/main/webapp/static/js/main.f5b35317.chunk.js
+/src/main/webapp/static/js/main.f5b35317.chunk.js.map
+/src/main/webapp/manifest.json
+/src/main/webapp/robots.txt
+/src/main/webapp/static/js/runtime-main.a17659fa.js
+/src/main/webapp/static/js/runtime-main.a17659fa.js.map

@@ -24,7 +24,7 @@ export default function Courses() {
                 )}
             </Grid>
 
-            <Button sx={{px: 2}} onClick={() => courseStore.courses.push({name: "Test Course", maxcap: 60, id: Math.ceil(Math.max(Math.random()*99999, 10000)), weekday: "Random Weekday", time: "08:00 - 22:00"})}> Add Test Course</Button>
+            <Button sx={{px: 2}} onClick={() => courseStore.postCourse()}> Add Test Course</Button>
         </Box>
     )
 }
