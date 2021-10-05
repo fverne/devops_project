@@ -26,9 +26,9 @@ export default class CourseStore {
     postCourse() {
         fetch(baseUrl + "rest/courses", {
             method: "POST",
-            body: JSON.stringify(this.courseExample)
+            body: JSON.stringify(this.courseExample),
         }).then(
-            (response) => response.json.then(
+            (response) => response.json().then(
                 (json) => runInAction(()=>this.courses.push(json))
             )
         )

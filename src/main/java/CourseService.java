@@ -24,8 +24,8 @@ public class CourseService {
 
     @POST
     public CourseDTO postCourse() {
-        String courseidrandomizer = String.valueOf(ceil(max(random()*99999, 10000)));
+        String courseidrandomizer = String.valueOf((int) ceil(max(random()*99999, 10000)));
 
-        return new CourseDTO("TestCourse", 50, courseidrandomizer, "RandomDay", "08:00 - 12:00");
+        return new CourseDTO("Test Course", 50, courseidrandomizer, "Random Day", "08:00 - 12:00");
     }
 }
