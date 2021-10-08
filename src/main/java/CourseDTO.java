@@ -1,6 +1,13 @@
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.corba.se.spi.ior.ObjectId;
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class CourseDTO implements Serializable {
+    @JsonIgnore //
+    private ObjectId _id;
     String name;
     int maxcap;
     String id;
@@ -15,43 +22,4 @@ public class CourseDTO implements Serializable {
         this.time = time;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getMaxcap() {
-        return maxcap;
-    }
-
-    public void setMaxcap(int maxcap) {
-        this.maxcap = maxcap;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getWeekday() {
-        return weekday;
-    }
-
-    public void setWeekday(String weekday) {
-        this.weekday = weekday;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 }
