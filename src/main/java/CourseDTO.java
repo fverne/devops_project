@@ -1,13 +1,11 @@
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.corba.se.spi.ior.ObjectId;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
 public class CourseDTO implements Serializable {
-    @JsonIgnore //
-    private ObjectId _id;
+    @JsonIgnore
     String name;
     int maxcap;
     String id;
