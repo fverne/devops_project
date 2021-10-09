@@ -1,11 +1,16 @@
+package DTOs;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.corba.ee.spi.ior.ObjectId;
 import lombok.Data;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Data
 public class CourseDTO implements Serializable {
-    @JsonIgnore
+    @Id @JsonIgnore
+    ObjectId _id;
     String name;
     int maxcap;
     String id;
