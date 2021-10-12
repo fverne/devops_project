@@ -1,28 +1,24 @@
 package DTOs;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.corba.ee.spi.ior.ObjectId;
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "CourseDTO")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CourseDTO implements Serializable {
-    @Id @JsonIgnore
-    ObjectId _id;
     String name;
     int maxcap;
     String id;
     String weekday;
     String time;
 
-    public CourseDTO(String name, int maxcap, String id, String weekday, String time) {
-        this.name = name;
-        this.maxcap = maxcap;
-        this.id = id;
-        this.weekday = weekday;
-        this.time = time;
-    }
-
+    @Id @GeneratedValue
+    @Column(name = "db_id")
+    private Long db_id;
 }

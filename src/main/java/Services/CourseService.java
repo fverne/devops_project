@@ -1,12 +1,15 @@
 package Services;
 
 import DTOs.CourseDTO;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
-import javax.ws.rs.POST;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,20 +19,29 @@ import static java.lang.Math.*;
 @Produces(MediaType.APPLICATION_JSON)
 @Path("courses")
 public class CourseService {
-    CourseDTO devopscourse = new CourseDTO("Devops", 30, "62582", "Tuesday", "8:00 - 12:00");
-    CourseDTO cppcourse = new CourseDTO("Programming in cpp", 200, "02393", "Tuesday", "18:00 - 22:00");
-    CourseDTO networkcourse = new CourseDTO("Network Security", 15, "62530", "Monday", "13:00 - 17:00");
+    SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-    List<CourseDTO> courses = Arrays.asList(devopscourse, cppcourse, networkcourse);
     @GET
     public List<CourseDTO> getCourses(){
-        return courses;
+        Session session = sessionFactory.openSession();
+        CriteriaQuery<CourseDTO> query = session.getCriteriaBuilder().createQuery(CourseDTO.class);
+        Root<CourseDTO> from = query.from(CourseDTO.class);
+        query.select(from);
+        List<CourseDTO> resultList = session.createQuery(query).getResultList();
+
+        return resultList;
     }
 
     @POST
-    public CourseDTO postCourse() {
-        String courseidrandomizer = String.valueOf((int) ceil(max(random()*99999, 10000)));
+    public CourseDTO save(CourseDTO courseDTO) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
 
-        return new CourseDTO("Test Course", 50, courseidrandomizer, "Random Day", "08:00 - 12:00");
+        session.save(courseDTO);
+        transaction.commit();
+        session.close();
+
+        return courseDTO;
     }
 }
+
