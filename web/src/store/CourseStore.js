@@ -13,6 +13,14 @@ export default class CourseStore {
         this.fetchCourses();
     }
 
+    fetchCourse(courseNumber) {
+        fetch(baseUrl + "rest/courses/" + courseNumber).then(
+            (response) => response.json().then(
+                (json) => runInAction(()=>this.courses=json)
+            )
+        )
+    }
+
     fetchCourses() {
         fetch(baseUrl + "rest/courses").then(
             (response) => response.json().then(

@@ -11,15 +11,30 @@ import javax.persistence.criteria.Root;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.Math.*;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("courses")
 public class CourseService {
-    SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+    @GET
+    @Path("{courseNumber}")
+    public CourseDTO getCourse(@PathParam("courseNumber") String courseNumber){
+        Session session = sessionFactory.openSession();
+        CriteriaQuery<CourseDTO> query = session.getCriteriaBuilder().createQuery(CourseDTO.class);
+        Root<CourseDTO> from = query.from(CourseDTO.class);
+
+        System.out.println(courseNumber);
+
+        query.select(from).where(session.getCriteriaBuilder().equal(from.get("id"), courseNumber));
+
+        CourseDTO result = session.createQuery(query).uniqueResult();
+        System.out.println(result);
+
+        return result;
+    }
 
     @GET
     public List<CourseDTO> getCourses(){
