@@ -13,6 +13,14 @@ export default class CourseStore {
         this.fetchCourses();
     }
 
+    fetchCourse(courseNumber) {
+        fetch(baseUrl + "rest/courses/" + courseNumber).then(
+            (response) => response.json().then(
+                (json) => runInAction(()=>this.courses=json)
+            )
+        )
+    }
+
     fetchCourses() {
         fetch(baseUrl + "rest/courses").then(
             (response) => response.json().then(
@@ -21,12 +29,14 @@ export default class CourseStore {
         )
     }
 
-    courseExample = [{name: "Test Course", maxcap: 60, id: Math.ceil(Math.max(Math.random()*99999, 10000)), weekday: "Random Weekday2", time: "08:00 - 22:00"}];
-
-    postCourse() {
+    postCourse(course) {
         fetch(baseUrl + "rest/courses", {
             method: "POST",
-            body: JSON.stringify(this.courseExample),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(course),
         }).then(
             (response) => response.json().then(
                 (json) => runInAction(()=>this.courses.push(json))

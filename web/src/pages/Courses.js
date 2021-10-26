@@ -10,6 +10,10 @@ import CourseStore from "../store/CourseStore";
 const courseStore = new CourseStore();
 
 export default function Courses() {
+    let courseExample;
+    courseExample = {name: "Test Course", maxcap: 60, id: Math.ceil(Math.max(Math.random()*99999, 10000)), weekday: "Random Weekday", time: "08:00 - 22:00"};
+
+
     return useObserver(() =>
         <Box padding={2}>
             <h1> Course Page</h1>
@@ -24,7 +28,7 @@ export default function Courses() {
                 )}
             </Grid>
 
-            <Button sx={{px: 2}} onClick={() => courseStore.postCourse()}> Add Test Course</Button>
+            <Button sx={{px: 2}} onClick={() => courseStore.postCourse(courseExample)}> Add Test Course</Button>
         </Box>
     )
 }
