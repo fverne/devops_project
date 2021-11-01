@@ -1,6 +1,7 @@
 package Services;
 
 import DTOs.CourseDTO;
+import Exceptions.NoImplementationException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,17 +22,14 @@ public class CourseService {
 
     @GET
     @Path("{courseNumber}")
-    public CourseDTO getCourse(@PathParam("courseNumber") String courseNumber){
+    public CourseDTO getCourse(@PathParam("courseNumber") String courseNumber) throws NoImplementationException {
         Session session = sessionFactory.openSession();
         CriteriaQuery<CourseDTO> query = session.getCriteriaBuilder().createQuery(CourseDTO.class);
         Root<CourseDTO> from = query.from(CourseDTO.class);
 
-        System.out.println(courseNumber);
-
         query.select(from).where(session.getCriteriaBuilder().equal(from.get("id"), courseNumber));
 
         CourseDTO result = session.createQuery(query).uniqueResult();
-        System.out.println(result);
 
         return result;
     }

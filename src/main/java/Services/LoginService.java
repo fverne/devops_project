@@ -1,7 +1,8 @@
-package Login;
+package Services;
 
 import DTOs.LoginData;
 import DTOs.User;
+import Login.JWTHandler;
 import kong.unirest.Unirest;
 
 import javax.ws.rs.*;
@@ -42,7 +43,6 @@ public class LoginService {
         }
         throw new Exceptions.NotAuthorizedException("forkert brugernavn/kodeord");
     }
-
 }
 
 
