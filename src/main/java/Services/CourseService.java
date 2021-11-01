@@ -35,7 +35,9 @@ public class CourseService {
     }
 
     @GET
-    public List<CourseDTO> getCourses(){
+    public List<CourseDTO> getCourses(@HeaderParam("Authorization") String authHeader){
+        System.out.println(authHeader);
+
         Session session = sessionFactory.openSession();
         CriteriaQuery<CourseDTO> query = session.getCriteriaBuilder().createQuery(CourseDTO.class);
         Root<CourseDTO> from = query.from(CourseDTO.class);

@@ -18,7 +18,7 @@ public class JWTHandler{
         Calendar expiry = Calendar.getInstance();
         expiry.add(Calendar.MINUTE, TOKEN_EXPIRY);
         return Jwts.builder()
-                .setIssuer("GiraffeDeluxe")
+                .setIssuer("Learnportal2")
                 .claim("user", user)
                 .signWith(SignatureAlgorithm.HS512, getKey())
                 .setExpiration(expiry.getTime())

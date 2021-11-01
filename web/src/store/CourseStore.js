@@ -1,4 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
+import {tokenStore} from "./TokenStore";
 
 
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev environment
@@ -22,7 +23,12 @@ export default class CourseStore {
     }
 
     fetchCourses() {
-        fetch(baseUrl + "rest/courses").then(
+        const token = tokenStore.token;
+        fetch(baseUrl + "rest/courses", {
+            headers: {
+                Authorization: token
+            }
+        }).then(
             (response) => response.json().then(
                 (json) => runInAction(()=>this.courses=json)
             )
