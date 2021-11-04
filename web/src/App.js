@@ -9,14 +9,13 @@ import Calendar from "./pages/Calendar"
 import Support from "./pages/Support"
 import CourseSingle from "./pages/CourseSingle";
 import {tokenStore} from "./store/TokenStore";
-import {FormControl, Input, InputLabel, TextField} from "@mui/material";
+import {FormControl, Input, InputLabel} from "@mui/material";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import {useObserver} from "mobx-react-lite";
 
 
 function App() {
-  return useObserver(() =>
+  return (
     <>
         <Navbar />
         <Switch>

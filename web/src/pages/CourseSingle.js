@@ -1,10 +1,11 @@
 import {useParams} from "react-router-dom";
-import {useObserver} from "mobx-react-lite";
 import CourseStore from "../store/CourseStore";
+import {useState} from "react";
 
 const courseStore = new CourseStore();
 
 export default function CourseSingle() {
+    const [isLoading, setLoading] = useState(true);
 
     const param = useParams()
     console.log(param);
@@ -14,8 +15,7 @@ export default function CourseSingle() {
 
     courseStore.fetchCourse(courseNumber)
 
-
-    return useObserver( () =>
+    return (
         <div>
             <h1>
                 {courseStore.courses.id}
