@@ -12,6 +12,7 @@ import {tokenStore} from "./store/TokenStore";
 import {FormControl, Input, InputLabel} from "@mui/material";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import {observer} from "mobx-react-lite";
 
 
 function App() {
@@ -53,4 +54,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

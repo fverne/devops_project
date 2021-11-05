@@ -5,7 +5,7 @@ import {useState} from "react";
 const courseStore = new CourseStore();
 
 export default function CourseSingle() {
-    const [isLoading, setLoading] = useState(true);
+    const [courseData, setCourseData] = useState({id : "loading course data"});
 
     const param = useParams()
     console.log(param);
@@ -13,12 +13,22 @@ export default function CourseSingle() {
     const courseNumber = param.course;
     console.log(courseNumber);
 
-    courseStore.fetchCourse(courseNumber)
+    console.log(courseData)
+    let jsonData = courseData;
+    courseStore.fetchCourse(courseNumber).then(
+        (data) => {
+            jsonData = data;
+            setCourseData(jsonData);
+        }
+    )
+
+    console.log(courseData)
+    console.log(courseData.id)
 
     return (
         <div>
             <h1>
-                {courseStore.courses.id}
+                {courseData.id}
             </h1>
         </div>
     );
