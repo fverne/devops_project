@@ -4,7 +4,7 @@ COPY /src/ ./src
 COPY /pom.xml ./
 RUN mvn package
 
-FROM node AS REACT
+FROM node:16 AS REACT
 WORKDIR /tmp
 COPY /web/package.json  ./
 COPY /web/src ./src

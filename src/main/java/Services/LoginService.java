@@ -18,33 +18,32 @@ public class LoginService {
     @GET
     @Path("login")
     public Response login(){
-        String URI =  "https://auth.dtu.dk/dtu/?service=http://localhost:8080/rest/campusnet/redirect";
+        String URI = "https://auth.dtu.dk/dtu/?service=http://localhost:8080/rest/campusnet/redirect";
         return Response.seeOther(UriBuilder.fromUri(URI).build()).build();
     }
 
+    //Tager imod en ticket i queryparams
     @GET
     @Path("redirect")
-    public String callback(@QueryParam("ticket") String cnTicket) throws NotAuthorizedException {
-        boolean authorized = false;
-
-        System.out.println(cnTicket); //Check if we got something back
-        String body = Unirest.get( "https://auth.dtu.dk/dtu/validate?service=http://localhost:8080/rest/campusnet/redirect&ticket="
-                        + cnTicket)
-                .asString()
-                .getBody();
-        //Validate body to see if login succeeded!!
-        User loggedInUser = JWTHandler.validate(body);
-        if (loggedInUser != null) {
-            authorized = true;
-        } else {
-            throw new Exceptions.NotAuthorizedException("bad login");
+    public Response callback(@QueryParam("ticket") String cnTicket) throws NotAuthorizedException {
+            System.out.println(cnTicket); //Check if we got something back
+            String body = Unirest.get( "https://auth.dtu.dk/dtu/validate?service=http://localhost:8080/rest/campusnet/redirect&ticket="
+                            + cnTicket)
+                    .asString()
+                    .getBody();
+            //Validate body to see if login succeeded!!
+            boolean authorized = false;
+            String insideID = "";
+            if (body.contains("yes")) {
+                authorized = true;
+                insideID = body.split("\n")[1];
+            }
+            if (authorized) {
+                String token = JWTHandler.generateJwtToken(new User(insideID));
+                return Response.seeOther(UriBuilder.fromUri("http://localhost:8080/?token="+ token).build()).build();
+            }
+            throw new NotAuthorizedException("DTU user not authorized");
         }
-        if (authorized) {
-            String tokenString = JWTHandler.generateJwtToken(new User());
-            return tokenString;
-        }
-        throw new NotAuthorizedException("you are not allowed to do this");
-    }
 
 
     @POST
@@ -58,7 +57,7 @@ public class LoginService {
     }
 
     @GET @Path("testtoken")
-    public User testToken(@HeaderParam("Authorization") String authentication) throws NotAuthorizedException {
+    public User testToken(@HeaderParam("Authorization") String authentication) throws Exceptions.NotAuthorizedException {
         System.out.println(authentication);
         User validate = JWTHandler.validate(authentication);
         return validate;
