@@ -1,24 +1,33 @@
 import {useParams} from "react-router-dom";
-import {useObserver} from "mobx-react-lite";
 import CourseStore from "../store/CourseStore";
+import {useEffect, useState} from "react";
 
 const courseStore = new CourseStore();
 
 export default function CourseSingle() {
+    const [courseData, setCourseData] = useState({id : "loading course data"});
 
     const param = useParams()
-    console.log(param);
-
     const courseNumber = param.course;
-    console.log(courseNumber);
 
-    courseStore.fetchCourse(courseNumber)
+    let jsonData = courseData;
+
+    useEffect(() => {
+        courseStore.fetchCourse(courseNumber).then(
+            (data) => {
+                jsonData = data;
+                setCourseData(jsonData);
+            }
+        )
+    }, [])
 
 
-    return useObserver( () =>
+    console.log(jsonData)
+
+    return (
         <div>
             <h1>
-                {courseStore.courses.id}
+                {courseData.id}
             </h1>
         </div>
     );

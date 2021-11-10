@@ -1,6 +1,9 @@
 package Services;
 
 import DTOs.CourseDTO;
+import DTOs.User;
+import Exceptions.NoImplementationException;
+import Login.JWTHandler;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,23 +24,20 @@ public class CourseService {
 
     @GET
     @Path("{courseNumber}")
-    public CourseDTO getCourse(@PathParam("courseNumber") String courseNumber){
+    public CourseDTO getCourse(@HeaderParam("Authorization") String authHeader, @PathParam("courseNumber") String courseNumber) {
         Session session = sessionFactory.openSession();
         CriteriaQuery<CourseDTO> query = session.getCriteriaBuilder().createQuery(CourseDTO.class);
         Root<CourseDTO> from = query.from(CourseDTO.class);
 
-        System.out.println(courseNumber);
-
         query.select(from).where(session.getCriteriaBuilder().equal(from.get("id"), courseNumber));
 
         CourseDTO result = session.createQuery(query).uniqueResult();
-        System.out.println(result);
 
         return result;
     }
 
     @GET
-    public List<CourseDTO> getCourses(){
+    public List<CourseDTO> getCourses(@HeaderParam("Authorization") String authHeader){
         Session session = sessionFactory.openSession();
         CriteriaQuery<CourseDTO> query = session.getCriteriaBuilder().createQuery(CourseDTO.class);
         Root<CourseDTO> from = query.from(CourseDTO.class);
@@ -48,7 +48,7 @@ public class CourseService {
     }
 
     @POST
-    public CourseDTO save(CourseDTO courseDTO) {
+    public CourseDTO save(@HeaderParam("Authorization") String authHeader, CourseDTO courseDTO) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 

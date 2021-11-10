@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Tomcat tomcat = new Tomcat();
         tomcat.setBaseDir("temp");
-        String port = Optional.ofNullable(System.getenv("PORT")).orElse("8080"); //Til Heroku //Til Heroku
+        String port = Optional.ofNullable(System.getenv("PORT")).orElse("8080"); //Til Heroku
 
         tomcat.setPort(Integer.parseInt(port));
         tomcat.getConnector(); //Creates a default HTTP connector
