@@ -50,7 +50,7 @@ function CoursePaper({course}) {
             onMouseLeave={() => setRaiseLevel(1)}
             onClick={() => {handleOnClick()}}
         >
-            <h2>{course.name} ({course.id || "ERROR: NO COURSE ID"})</h2>
+            <h2>{course.name} ({course.id || "Loading courses..."})</h2>
             <p>{course.weekday + ", " + course.time}</p>
         </Paper>
     )
