@@ -35,6 +35,7 @@
 
         <!-- Persistent classes - remember to update -->
         <mapping class="DTOs.CourseDTO"/>
+        <mapping class="DTOs.User"/>
 
     </session-factory>
 </hibernate-configuration>
