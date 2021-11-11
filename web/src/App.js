@@ -56,10 +56,6 @@ function App() {
             <Route path='/support' exact component={Support}/>
             <Route render={()=><h1>404</h1>}/>
         </Switch>
-
-        <h2>DEBUG Loginstatus = {tokenStore.state}</h2>
-
-
     </>
   );
 }
