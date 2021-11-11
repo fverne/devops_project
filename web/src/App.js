@@ -31,7 +31,7 @@ function App() {
         window.location.replace("/");
     }
 
-    if (tokenStore.state === "Logout") {
+    if (tokenStore.state !== "LoggedIn") {
         return (
             <Login/>
         )
