@@ -12,6 +12,9 @@ test('Home button Checker', async () => {
   const items1 = await screen.findAllByText(/Home/)
   expect(items1).toHaveLength(2)
 
+    //  Skal måske trykke på ikonet oppe i venstre hjørne først?
+    // fireevent.click(screen.get)
+
   fireEvent.click(screen.getByText('Courses'))
 
   // Wait for page to update with query text
