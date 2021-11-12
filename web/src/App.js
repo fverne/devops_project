@@ -44,7 +44,7 @@ function App() {
         <Navbar />
         <Switch>
             <Route exact path="/">
-                <Home />
+                <Home data-testid="hometest"/>
             </Route>
             <Route path='/courses/:course'>
                    <CourseSingle/>
