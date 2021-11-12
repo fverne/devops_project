@@ -8,8 +8,6 @@ services:
     restart: always
     ports:
       - 8080:8080
-    networks:
-      - captain-overlay-network
 
   db:
     image: postgres:latest
@@ -19,7 +17,3 @@ services:
       POSTGRES_DB: hibernatedb
     ports:
       - 5432:5432
-
-networks:
-  captain-overlay-network:
-    external: true
