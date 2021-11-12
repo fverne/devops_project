@@ -10,7 +10,6 @@ import Support from "./pages/Support"
 import CourseSingle from "./pages/CourseSingle";
 import {tokenStore} from "./store/TokenStore";
 import {observer} from "mobx-react-lite";
-import Login from "./pages/Login";
 
 
 function App() {
@@ -32,12 +31,12 @@ function App() {
         //window.location.replace("/");
     }
 
-    if (tokenStore.state !== "LoggedIn") {
-        window.location.replace("/rest/campusnet/login")
+    //if (tokenStore.state !== "LoggedIn") {
+    //    window.location.replace("/rest/campusnet/login")
         //return (
             //<Login/>
         //)
-    }
+    //}
 
   return (
     <>
