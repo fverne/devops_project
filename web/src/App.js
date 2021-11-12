@@ -24,17 +24,19 @@ function App() {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
     const token = getParameterByName("token");
-    if (token!=null && token.length>0){
+    if (token!=null && token.length>0) {
         //Store token and redirect to baseURL
         localStorage.setItem("portal-jwt-Token",token);
         console.log(localStorage.getItem("portal-jwt-Token"))
-        window.location.replace("/");
+        tokenStore.state = "LoggedIn";
+        //window.location.replace("/");
     }
 
     if (tokenStore.state !== "LoggedIn") {
-        return (
-            <Login/>
-        )
+        window.location.replace("/rest/campusnet/login")
+        //return (
+            //<Login/>
+        //)
     }
 
   return (
@@ -56,10 +58,6 @@ function App() {
             <Route path='/support' exact component={Support}/>
             <Route render={()=><h1>404</h1>}/>
         </Switch>
-
-        <h2>DEBUG Loginstatus = {tokenStore.state}</h2>
-
-
     </>
   );
 }

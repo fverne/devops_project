@@ -19,7 +19,7 @@ public class LoginService {
     @Path("login")
     public Response login(){
         String URI = "https://auth.dtu.dk/dtu/?service=http://localhost:8080/rest/campusnet/redirect";
-        return Response.seeOther(UriBuilder.fromUri(URI).build()).build();
+        return Response.temporaryRedirect(UriBuilder.fromUri(URI).build()).build();
     }
 
     //Tager imod en ticket i queryparams

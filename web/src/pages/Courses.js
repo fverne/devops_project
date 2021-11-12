@@ -14,7 +14,7 @@ export default function Courses() {
     courseExample = {name: "Test Course", maxcap: 60, id: Math.ceil(Math.max(Math.random()*99999, 10000)), weekday: "Random Weekday", time: "08:00 - 22:00"};
 
     useEffect(() => {
-        courseStore.fetchCourses();
+        courseStore.fetchCourses()
     }, [])
 
     return useObserver(() =>
@@ -51,7 +51,7 @@ function CoursePaper({course}) {
             onClick={() => {handleOnClick()}}
         >
             <h2>{course.name} ({course.id || "Loading courses..."})</h2>
-            <p>{course.weekday + ", " + course.time}</p>
+            <p>{(course.weekday + ", " + course.time) || " "}</p>
         </Paper>
     )
 }
