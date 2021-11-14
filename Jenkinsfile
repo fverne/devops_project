@@ -1,19 +1,12 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-    }
-
-  }
+  agent any
   stages {
-    stage('error') {
+    stage('docker build / docke run') {
       steps {
-        echo 'finished xD'
+        sh '''docker build -t devops .
+docker run -p 8080:8080 devops'''
       }
     }
 
-  }
-  environment {
-    HEROKUBUILD = 'true'
   }
 }
