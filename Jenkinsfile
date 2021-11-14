@@ -9,7 +9,7 @@ pipeline {
 
     stage('docker run') {
       steps {
-        sh 'docker run -p 8080:8080 devops'
+        sh 'docker run -p 8080:8080 -d devops'
       }
     }
 
