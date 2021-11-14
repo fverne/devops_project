@@ -15,7 +15,7 @@ pipeline {
 
     stage('docker run') {
       steps {
-        sh 'docker run -p 8080:8080 -d devops'
+        sh 'docker run --rm -p 8080:8080 -d devops'
       }
     }
 
