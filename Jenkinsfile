@@ -9,8 +9,6 @@ pipeline {
     stage('error') {
       steps {
         echo 'finished xD'
-        sh '''docker build -t devops .
-docker run -p 80:8080 devops'''
       }
     }
 
