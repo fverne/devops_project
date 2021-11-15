@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  triggers {
-      pollSCM('') // Enabling being build on Push
-    }
   stages {
     stage('Docker Network') {
       steps {
@@ -12,7 +9,7 @@ pipeline {
 
     stage('postgres run') {
       steps {
-        sh 'docker run --rm --net godinside -d --name=postgres13 -p 5432:5432 -v postgres-volume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=Meme4321! -e POSTGRES_DB=hibernatedb postgres'
+        sh 'docker run --rm --net godinside -d --name=postgres13 -p 5432:5432 -v postgres-volume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=Meme4321! -e POSTGRES_DB=hibernatedb postgres || true'
       }
     }
 
@@ -28,5 +25,8 @@ pipeline {
       }
     }
 
+  }
+  triggers {
+    pollSCM('')
   }
 }
