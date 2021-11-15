@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Docker Network') {
       steps {
-        sh 'docker network create godinside'
+        sh 'docker network create godinside || true'
       }
     }
 
