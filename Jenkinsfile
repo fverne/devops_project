@@ -4,8 +4,8 @@ pipeline {
     stage('Docker Network') {
       steps {
         sh '''docker network create godinside || true
-docker stop devops
-docker stop postgres13'''
+docker stop devops || true
+docker stop postgres13 || true'''
       }
     }
 
