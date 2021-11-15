@@ -1,8 +1,8 @@
 pipeline {
   agent any
   stages {
-    when { branch 'master' }
     stage('Docker Network') {
+        when { branch 'master' }
       steps {
         sh '''docker network create godinside || true
 docker stop devops || true
