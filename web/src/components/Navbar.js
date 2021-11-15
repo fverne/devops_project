@@ -18,7 +18,7 @@ function Navbar(){
                     <FaIcons.FaBars onClick={showSidebar}/>
                 </Link>
                 <div className = 'title'>
-                    DTU Learn 2.0
+                    God Inside
                 </div>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
