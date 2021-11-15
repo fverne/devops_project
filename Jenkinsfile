@@ -9,7 +9,7 @@ pipeline {
 
     stage('postgres run') {
       steps {
-        sh 'docker run --rm --net host -d --name=postgres13 -p 5432:5432 -v postgres-volume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=Meme4321! -e POSTGRES_DB=hibernatedb postgres || true'
+        sh 'docker run --rm --net bridge -d --name=postgres13 -p 5432:5432 -v postgres-volume:/var/lib/postgresql/data -e POSTGRES_PASSWORD=Meme4321! -e POSTGRES_DB=hibernatedb postgres || true'
       }
     }
 
@@ -21,7 +21,7 @@ pipeline {
 
     stage('docker run') {
       steps {
-        sh 'docker run --rm --net host -p 8080:8080 -d devops'
+        sh 'docker run --rm --net bridge -p 8080:8080 -d devops'
       }
     }
 
