@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  triggers {
+    pollSCM('')
+  }
   stages {
     stage('Docker Network') {
       when {
@@ -39,8 +42,5 @@ docker stop postgres13 || true'''
       }
     }
 
-  }
-  triggers {
-    pollSCM('')
   }
 }
