@@ -1,5 +1,5 @@
 # Use postgres/example user/password credentials
-version: '3.5'
+version: '3.8'
 
 services:
 
@@ -10,8 +10,11 @@ services:
       - 8080:8080
     depends_on:
       - "db"
+    networks:
+      - godinside
 
   db:
+    container_name: postgres13
     image: postgres:latest
     restart: always
     environment:
@@ -19,3 +22,9 @@ services:
       POSTGRES_DB: hibernatedb
     ports:
       - 5432:5432
+    networks:
+      - godinside
+
+networks:
+  godinside:
+    name: godinside
