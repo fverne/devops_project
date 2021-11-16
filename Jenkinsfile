@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  triggers {
-    pollSCM('')
-  }
   stages {
     stage('Docker Network') {
       when {
@@ -41,6 +38,8 @@ docker stop postgres13 || true'''
         sh 'docker run --rm --net godinside -p 8080:8080 -d --name=devops devops'
       }
     }
-
+  triggers {
+    pollSCM('')
+  }
   }
 }
