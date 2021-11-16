@@ -54,7 +54,7 @@ test("renders the button for adding courses", () =>{
 
 /*
 test("loads site", async() =>{
-    render(<Home />)
+    render(<Home />) // Can we build it?
 
     fireEvent.click(screen.getByTestId("menutest"))
 
