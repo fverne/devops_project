@@ -10,12 +10,13 @@ import Support from "./pages/Support"
 import CourseSingle from "./pages/CourseSingle";
 import {tokenStore} from "./store/TokenStore";
 import {observer} from "mobx-react-lite";
+import Login from "./pages/Login";
 
 
 function App() {
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
-        //name = name.replace(/[\[\]]/g, "\\$&");
+        name = name.replace(/[\[\]]/g, "\\$&");
         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
             results = regex.exec(url);
         if (!results) return null;
@@ -24,19 +25,19 @@ function App() {
     }
     const token = getParameterByName("token");
     if (token!=null && token.length>0) {
-        //Store token and redirect to baseURL
+        Store token and redirect to baseURL
         localStorage.setItem("portal-jwt-Token",token);
         console.log(localStorage.getItem("portal-jwt-Token"))
         tokenStore.state = "LoggedIn";
         //window.location.replace("/");
     }
 
-    //if (tokenStore.state !== "LoggedIn") {
-    //    window.location.replace("/rest/campusnet/login")
-        //return (
-            //<Login/>
-        //)
-    //}
+    if (tokenStore.state !== "LoggedIn") {
+      window.location.replace("/rest/campusnet/login")
+        return (
+            <Login/>
+        )
+    }
 
   return (
     <>

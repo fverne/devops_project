@@ -1,0 +1,55 @@
+package business;
+
+import business.impl.*;
+import business.interfaces.*;
+
+/**
+ * Created by Christian on 27-06-2017.
+ */
+public class ControllerRegistry {
+
+    private static CourseController courseController;
+    private static CoursePlanController coursePlanControlller;
+    private static AgendaController agendaController;
+    private static UserController userController;
+    private static UserDataController userDataController;
+    private static RoleController roleController;
+    private static UserDataBaseController userDatabaseController;
+
+    public static CourseController getCourseController(){
+        if (courseController==null) courseController=new CourseControllerImpl();
+        return courseController;
+    }
+
+    public static CoursePlanController getCoursePlanController(){
+        if (coursePlanControlller == null) coursePlanControlller = new CoursePlanControllerImpl();
+        return coursePlanControlller;
+    }
+
+    public static AgendaController getAgendaController(){
+        if (agendaController==null) agendaController = new AgendaControllerImpl();
+        return agendaController;
+    }
+
+    public static UserController getUserController(){
+        if (userController == null) userController = new UserControllerImpl();
+        return userController;
+    }
+
+    public static UserDataController getUserDataController() {
+        if (userDataController == null) userDataController = new UserDataControllerImpl();
+        return userDataController;
+
+    }
+
+    public static RoleController getRoleController() {
+        if (roleController == null) roleController = new RoleControllerImpl();
+        return roleController;
+
+    }
+
+    public static UserDataBaseController getUserDatabaseController() {
+        if(userDatabaseController ==null) userDatabaseController = new UserDataBaseControllerImpl();
+        return userDatabaseController;
+    }
+}
