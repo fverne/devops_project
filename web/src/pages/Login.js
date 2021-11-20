@@ -3,7 +3,14 @@ import Box from "@mui/material/Box";
 import {FormControl, Input, InputLabel} from "@mui/material";
 import {tokenStore} from "../store/TokenStore";
 import Button from "@mui/material/Button";
-import {CardMedia} from "@material-ui/core";
+import {Avatar, CardMedia, Paper} from "@material-ui/core";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
+const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+const avatarStyle={backgroundColor:'#1a83ff'}
+const btnstyle={margin:'8px 0', backgroundColor: '#1a83ff'}
+
 
 export default function Login() {
     return(
@@ -35,13 +42,7 @@ export default function Login() {
                 <Button variant="contained" color="secondary" style={btnstyle} fullWidth  > Login with inside</Button>
                 <grid>
 
-                    <CardMedia
 
-                        src="C:\Users\sande\Documents\GitHub\login_page\src\dtu_icon.jpg"
-                        title="dtu icon"
-                        style={{width: "100%", height: "100%", objectFit: "auto"}}
-
-                    />
                 </grid>
 
             </Paper>
