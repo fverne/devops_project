@@ -28,6 +28,6 @@ pipeline {
     }
   }
   triggers {
-    pollSCM('* * * *')
+    pollSCM('2 * * * *')
   }
 }
