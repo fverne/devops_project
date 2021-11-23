@@ -3,7 +3,6 @@ package DTOs;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.Role;
 
 import java.util.*;
 
@@ -16,7 +15,7 @@ public class User  {
     private String Email;
     private String firstName;
     private String lastName;
-    private List<Role> roles = new ArrayList<>();
+    private List<String> roles = new ArrayList<>();
     private transient boolean isAdminOfCourses = false;
 
 
