@@ -4,8 +4,8 @@ pipeline {
     stage('Docker Network') {
       steps {
         sh '''docker network create godinside || true
-docker stop devops || true
-docker stop postgres13 || true'''
+            docker stop devops || true
+            docker stop postgres13 || true'''
       }
     }
 
@@ -26,5 +26,8 @@ docker stop postgres13 || true'''
         sh 'docker run --rm --net godinside -p 8080:8080 -d --name=devops devops'
       }
     }
+  }
+  triggers {
+    pollSCM('* * * *')
   }
 }
