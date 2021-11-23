@@ -4,9 +4,18 @@ import {FormControl, Input, InputLabel} from "@mui/material";
 import {tokenStore} from "../store/TokenStore";
 import Button from "@mui/material/Button";
 import {CardMedia} from "@material-ui/core";
+import UserStore from "../store/UserStore";
 
 export default function Login() {
+    let studentExample;
+    studentExample ={userName: "s21" + Math.ceil(Math.max(Math.random()*9999, 1000)), password: "PlsLogin", role: "Student" }
+
+    let teacherExample;
+    teacherExample ={userName: "Teacher" + Math.ceil(Math.max(Math.random()*99, 10)), password: "PlsLogin", role: "Teacher" }
+
     return(
+
+
         <Grid
             component="form"
             sx={{
@@ -32,16 +41,12 @@ export default function Login() {
 
 
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth onClick={()=>tokenStore.doLogin()}>Sign in</Button>
-                <Button variant="contained" color="secondary" style={btnstyle} fullWidth  > Login with inside</Button>
+                <Button variant="contained" color="secondary" style={btnstyle} fullWidth onClick={()=>tokenStore.doCampusLogin()}  > Login with inside</Button>
+                <Button variant="contained" color="secondary" style={btnstyle} fullWidth onClick={() => UserStore.postUser(studentExample)} > Create Student</Button>
+                <Button variant="contained" color="secondary" style={btnstyle} fullWidth onClick={() => UserStore.postUser(teacherExample)} > Create Teacher</Button>
                 <grid>
 
-                    <CardMedia
 
-                        src="C:\Users\sande\Documents\GitHub\login_page\src\dtu_icon.jpg"
-                        title="dtu icon"
-                        style={{width: "100%", height: "100%", objectFit: "auto"}}
-
-                    />
                 </grid>
 
             </Paper>

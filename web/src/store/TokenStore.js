@@ -13,7 +13,12 @@ class TokenStore {
         this.token = localStorage.getItem("loginToken")
     }
 
-    doLogin() {
+    doLogin(){
+
+
+    }
+
+    doCampusLogin() {
         this.state=Loginstates.LOGGING_IN;
         fetch(baseUrl + "rest/campusnet/login",{
             method:"POST",

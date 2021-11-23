@@ -1,6 +1,6 @@
 package Login;
 
-import DTOs.User;
+import DTOs.UserDTO;
 import Exceptions.NotAuthorizedException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
@@ -18,7 +18,7 @@ public class JWTHandler{
     private static Key key;
     private static final int TOKEN_EXPIRY = 2880; //2 days
 
-    public static String generateJwtToken(User user){
+    public static String generateJwtToken(UserDTO user){
         Calendar expiry = Calendar.getInstance();
         expiry.add(Calendar.MINUTE, TOKEN_EXPIRY);
         return Jwts.builder()
@@ -30,7 +30,7 @@ public class JWTHandler{
     }
 
 
-    public static User validate(String authentication) throws NotAuthorizedException {
+    public static UserDTO validate(String authentication) throws NotAuthorizedException {
         String[] tokenArray = authentication.split(" ");
         String token = tokenArray[tokenArray.length - 1];
         try {
@@ -39,7 +39,7 @@ public class JWTHandler{
                     .parseClaimsJws(token)
                     .getBody();
             ObjectMapper mapper = new ObjectMapper();
-            User user = mapper.convertValue(claims.get("user"), User.class);
+            UserDTO user = mapper.convertValue(claims.get("user"), UserDTO.class);
             System.out.println(user);
             return user;
         } catch (JwtException e) {

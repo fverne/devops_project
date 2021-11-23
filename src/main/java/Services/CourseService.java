@@ -1,9 +1,6 @@
 package Services;
 
 import DTOs.CourseDTO;
-import DTOs.User;
-import Exceptions.NoImplementationException;
-import Login.JWTHandler;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

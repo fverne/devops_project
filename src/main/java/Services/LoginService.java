@@ -1,7 +1,7 @@
 package Services;
 
 import DTOs.LoginData;
-import DTOs.User;
+import DTOs.UserDTO;
 import Exceptions.NotAuthorizedException;
 import Login.JWTHandler;
 import kong.unirest.Unirest;
@@ -39,7 +39,7 @@ public class LoginService {
                 insideID = body.split("\n")[1];
             }
             if (authorized) {
-                String token = JWTHandler.generateJwtToken(new User(insideID));
+                String token = JWTHandler.generateJwtToken(new UserDTO(insideID));
                 return Response.seeOther(UriBuilder.fromUri("http://localhost:8080/?token="+ token).build()).build();
             }
             throw new NotAuthorizedException("DTU user not authorized");
@@ -51,15 +51,15 @@ public class LoginService {
     public String postLoginData(LoginData login) throws NotAuthorizedException
     {
         if (login!=null && "brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
-            return JWTHandler.generateJwtToken(new User(login.getUsername()));
+            return JWTHandler.generateJwtToken(new UserDTO(login.getUsername()));
         }
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
     @GET @Path("testtoken")
-    public User testToken(@HeaderParam("Authorization") String authentication) throws Exceptions.NotAuthorizedException {
+    public UserDTO testToken(@HeaderParam("Authorization") String authentication) throws Exceptions.NotAuthorizedException {
         System.out.println(authentication);
-        User validate = JWTHandler.validate(authentication);
+        UserDTO validate = JWTHandler.validate(authentication);
         return validate;
     }
 }
