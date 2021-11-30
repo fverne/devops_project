@@ -18,7 +18,7 @@ public class CampusNetLogin {
     @Path("login")
     @GET
     public Response getLogin() {
-        URI uri = URI.create(Config.CAMPUSNET_LOGIN_URL + "?service=" + Config.GODINSIDE + "/rest/campusnet/redirect");
+        URI uri = URI.create(Config.CAMPUSNET_LOGIN_URL + "?service=" + Config.GODINSIDE + "rest/campusnet/redirect");
         return Response.temporaryRedirect(uri).build();
     }
 
@@ -28,7 +28,7 @@ public class CampusNetLogin {
         //Tjek ticket mod CampusNet
 
         try {
-            String body = Unirest.get( "https://auth.dtu.dk/dtu/validate?service=" + Config.GODINSIDE + "/rest/campusnet/redirect&ticket="
+            String body = Unirest.get( "https://auth.dtu.dk/dtu/validate?service=" + Config.GODINSIDE + "rest/campusnet/redirect&ticket="
                             + cnTicket)
                     .asString()
                     .getBody();
@@ -44,7 +44,7 @@ public class CampusNetLogin {
     //                userController.saveUser(user);
                 jwtToken = JWTHandler.generateJwtToken(new User(validationArray[1].trim(), ""));
                 //Generating redirection page and returning it.
-                String html = Config.GODINSIDE + "/?token=" + jwtToken;
+                String html = Config.GODINSIDE + "?token=" + jwtToken;
                 return Response.seeOther(UriBuilder.fromUri(html)
                         .build())
                         .header("Authorization", "Bearer " + jwtToken)
