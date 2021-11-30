@@ -1,5 +1,6 @@
 import Metrics.Metrics;
 import io.prometheus.client.exporter.HTTPServer;
+import io.prometheus.client.hotspot.DefaultExports;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
@@ -11,6 +12,7 @@ public class Main {
     Metrics metrics = new Metrics(); //needed to start monitoring
 
     public static void main(String[] args) throws IOException {
+        DefaultExports.initialize();
         HTTPServer prometheusServer = new HTTPServer(19998);
 
         Tomcat tomcat = new Tomcat();

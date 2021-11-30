@@ -3,7 +3,6 @@ package Services;
 import DTOs.LoginData;
 import DTOs.User;
 import Login.JWTHandler;
-import io.prometheus.client.Counter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
