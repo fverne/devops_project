@@ -1,6 +1,5 @@
 import Metrics.Metrics;
 import io.prometheus.client.exporter.HTTPServer;
-import io.prometheus.client.hotspot.DefaultExports;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
