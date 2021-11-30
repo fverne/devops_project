@@ -9,7 +9,7 @@ console.log(token);
 if (token!=null && token.length>0){
     //Store token and redirect to baseURL
     localStorage.setItem("loginToken",token);
-    //window.location.replace("/");
+    window.location.replace("/");
 }
 
 

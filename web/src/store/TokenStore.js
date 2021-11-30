@@ -15,8 +15,6 @@ class TokenStore {
         if (this.token) {
             this.state = Loginstates.LOGGED_IN;
         }
-
-        //Validate if token is still good and keep/discard token and set state
     }
 
     doLogin() {
