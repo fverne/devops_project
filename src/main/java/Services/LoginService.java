@@ -20,9 +20,9 @@ public class LoginService {
     public String postLoginData(LoginData login){
         attemptCounter.inc();
         if (login!=null &&"brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
-            failCounter.inc();
             return JWTHandler.generateJwtToken(new User(login.getUsername(), ""));
         }
+        failCounter.inc();
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
