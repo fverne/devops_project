@@ -11,6 +11,11 @@ class TokenStore {
     constructor() {
         makeAutoObservable(this)
         this.token = localStorage.getItem("loginToken")
+
+        if (this.token) {
+            this.state = Loginstates.LOGGED_IN;
+        }
+
         //Validate if token is still good and keep/discard token and set state
     }
 
