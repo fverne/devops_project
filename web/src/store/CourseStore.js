@@ -5,6 +5,7 @@ import {tokenStore} from "./TokenStore";
 
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev environment
 
+const states = {LOADING:"LOAD", DONE:"DONE", FAILED:"FAILED"}
 export default class CourseStore {
     courses = [
         "loading courses..."
@@ -19,7 +20,7 @@ export default class CourseStore {
 
     fetchCourse(courseNumber) {
         const token = tokenStore.token;
-
+        this.loading = states.LOADING;
         return fetch(baseUrl + "rest/courses/" + courseNumber, {
             headers: {
                 Authorization: token

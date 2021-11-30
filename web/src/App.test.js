@@ -1,11 +1,32 @@
 import App from './App';
 import {BrowserRouter, HashRouter} from "react-router-dom";
-import {render, fireEvent, screen} from '@testing-library/react'
 import * as ReactDOM from "react-dom";
 import Navbar from "./components/Navbar";
 import "@testing-library/jest-dom";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
+import React from "react";
+import {render, cleanup, waitForElement, fireEvent, screen} from "@testing-library/react";
+//import "jest-dom/extend-expect";
+//import axiosMock from "axios";
+import CoursePaper from "./pages/Courses";
+
+
+afterEach(cleanup);
+
+//Passer (30/11-21 02:46)
+//Tror at den fetcher data når den skal vise courses, men da den
+//ikke kan hente courses lige nu, så står der bare "loading courses".
+//Når den kan fetche rigtig data, kan vi teste på den i stedet for forhåbentlig
+test("fetches and display data", async () => {
+    const url = "/courses";
+    const { getByTestId } = render(<CoursePaper url = {url}/>);
+
+    expect(getByTestId("loading")).toHaveTextContent("Loading courses...");
+})
+
+
+
 /*
 // Checks if navigation works, by switching page from Home to something else
 test('Home button Checker', async () => {
