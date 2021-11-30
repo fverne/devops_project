@@ -9,13 +9,14 @@ class TokenStore {
     logindata = {username:"",password:""};
 
     constructor() {
-        makeAutoObservable(this,{},{autoBind:true});
+        makeAutoObservable(this)
         this.token = localStorage.getItem("loginToken")
+        //Validate if token is still good and keep/discard token and set state
     }
 
     doLogin() {
         this.state=Loginstates.LOGGING_IN;
-        fetch(baseUrl + "rest/campusnet/login",{
+        fetch(baseUrl + "rest/login",{
             method:"POST",
             body:JSON.stringify(this.logindata),
             headers: {
@@ -32,8 +33,7 @@ class TokenStore {
                             console.log("Got Token: " + token)
                             this.token=token;
                             localStorage.setItem("loginToken",token);
-                            this.state=Loginstates.LOGGED_IN;
-                        }
+                            this.state=Loginstates.LOGGED_IN;}
                     )
                 }
             }

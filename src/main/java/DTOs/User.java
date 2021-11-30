@@ -1,25 +1,14 @@
 package DTOs;
 
+import lombok.*;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class User  {
-    public static final String userNameString="userName";
-
-    private String userName;
-    private String Email;
-    private String firstName;
-    private String lastName;
-    private List<String> roles = new ArrayList<>();
-    private transient boolean isAdminOfCourses = false;
-
-
-    public User(String username) {
-        this.userName = username;
-    }
+@AllArgsConstructor
+@Builder
+public class User implements Serializable {
+    private String username;
+    private String gitHubToken;
 }

@@ -38,6 +38,11 @@ public class CourseService {
 
     @GET
     public List<CourseDTO> getCourses(@HeaderParam("Authorization") String authHeader){
+        System.out.println(authHeader);
+        User user = JWTHandler.validate(authHeader);
+        System.out.println("User accessing giraffes: " + user);
+
+
         Session session = sessionFactory.openSession();
         CriteriaQuery<CourseDTO> query = session.getCriteriaBuilder().createQuery(CourseDTO.class);
         Root<CourseDTO> from = query.from(CourseDTO.class);

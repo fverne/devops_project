@@ -1,11 +1,29 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import {FormControl, Input, InputLabel} from "@mui/material";
 import {tokenStore} from "../store/TokenStore";
 import Button from "@mui/material/Button";
-import {CardMedia} from "@material-ui/core";
+import {Avatar, Paper} from "@material-ui/core";
+import Grid from "@mui/material/Grid";
+import {LockOutlined} from "@mui/icons-material";
+import Config from "../config";
 
 export default function Login() {
+    let studentExample;
+    studentExample ={userName: "s21" + Math.ceil(Math.max(Math.random()*9999, 1000)), password: "PlsLogin", role: "Student" }
+
+    let teacherExample;
+    teacherExample ={userName: "Teacher" + Math.ceil(Math.max(Math.random()*99, 10)), password: "PlsLogin", role: "Teacher" }
+
+    const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+    const avatarStyle={backgroundColor:'#1a83ff'}
+    const btnstyle={margin:'8px 0', backgroundColor: '#1a83ff'}
+
+
+    const cnLogin = () =>{
+        const redirectUrl = Config.ApiPath ? Config.ApiPath + Config.campusNetServiceUrl : Config.campusNetServiceUrl;
+        window.location.replace(redirectUrl);
+    }
+
     return(
         <Grid
             component="form"
@@ -17,7 +35,7 @@ export default function Login() {
         >
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
-                    <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
+                    <Avatar style={avatarStyle}><LockOutlined/></Avatar>
                     <h2>DTU INSIDE</h2>
                 </Grid>
 
@@ -32,18 +50,9 @@ export default function Login() {
 
 
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth onClick={()=>tokenStore.doLogin()}>Sign in</Button>
-                <Button variant="contained" color="secondary" style={btnstyle} fullWidth  > Login with inside</Button>
-                <grid>
-
-                    <CardMedia
-
-                        src="C:\Users\sande\Documents\GitHub\login_page\src\dtu_icon.jpg"
-                        title="dtu icon"
-                        style={{width: "100%", height: "100%", objectFit: "auto"}}
-
-                    />
-                </grid>
-
+                <Button variant="contained" color="secondary" style={btnstyle} fullWidth onClick={cnLogin}  > Login with inside</Button>
+                <Button variant="contained" color="secondary" style={btnstyle} fullWidth onClick={() => console.log(studentExample)} > Create Student</Button>
+                <Button variant="contained" color="secondary" style={btnstyle} fullWidth onClick={() => console.log(teacherExample)} > Create Teacher</Button>
             </Paper>
         </Grid>
     )
