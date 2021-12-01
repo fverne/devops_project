@@ -10,7 +10,7 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) throws IOException {
         DefaultExports.initialize();
-        HTTPServer prometheusServer = new HTTPServer(19998);
+        HTTPServer prometheusServer = new HTTPServer.Builder().withPort(19998).build();
 
         Tomcat tomcat = new Tomcat();
         tomcat.setBaseDir("temp");
