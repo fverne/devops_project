@@ -35,3 +35,9 @@ function getParameterByName(name, url) {
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 //reportWebVitals();
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Stash the event so it can be triggered later.
+    console.log("Got beforeinstallprompt");
+    window.deferredPrompt = e;
+});

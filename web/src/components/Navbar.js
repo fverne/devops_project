@@ -5,6 +5,7 @@ import * as AiIcons from "react-icons/ai";
 import {SidebarData} from "./SidebarData";
 import './Navbar.css';
 import {IconContext} from "react-icons"
+import Button from "@mui/material/Button";
 
 function Navbar(){
     const [sidebar, setSidebar] = useState(false)
@@ -19,6 +20,7 @@ function Navbar(){
                 </Link>
                 <div className = 'title'>
                     Den Gode Inside
+                    <Button onClick={()=>{window.deferredPrompt.prompt();}}>Install as native app!</Button>
                 </div>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
