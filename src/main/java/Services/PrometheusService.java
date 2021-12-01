@@ -14,7 +14,7 @@ public class PrometheusService {
         Metrics.attemptCounter.inc(); // Hack - Data reporting only starts after one counter has been altered
         StringWriter writer = new StringWriter();
         try {
-            io.prometheus.client.exporter.common.TextFormat.write004(
+            io.prometheus.client.exporter.common.TextFormat.writeOpenMetrics100(
                     writer, CollectorRegistry.defaultRegistry.metricFamilySamples());
         } catch (Exception e) {
             return e.getMessage();
