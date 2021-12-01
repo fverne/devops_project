@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/":""; //Check if dev environment
 
@@ -13,7 +13,23 @@ class TokenStore {
         this.token = localStorage.getItem("loginToken")
     }
 
-    doLogin(){
+    doLogin(logindata){
+        const token = tokenStore.token;
+
+        return fetch(baseUrl + "rest/users/" + logindata , {
+            headers: {
+                Authorization: token
+            }
+        }).then(
+            (response) => response.json().then(
+                (json) => {
+                    runInAction(() => this.user = json);
+                    return json;
+                }
+            ).catch((e) => {
+                console.error(e)
+            })
+        )
 
 
     }

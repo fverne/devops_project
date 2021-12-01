@@ -3,16 +3,17 @@ import Box from "@mui/material/Box";
 import {FormControl, Input, InputLabel} from "@mui/material";
 import {tokenStore} from "../store/TokenStore";
 import Button from "@mui/material/Button";
-import {CardMedia} from "@material-ui/core";
+import {Avatar, CardMedia, Paper} from "@material-ui/core";
 import UserStore from "../store/UserStore";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Grid from "@mui/material/Grid";
 
 export default function Login() {
     let studentExample;
-    studentExample ={userName: "s21" + Math.ceil(Math.max(Math.random()*9999, 1000)), password: "PlsLogin", role: "Student" }
+    studentExample ={userName: "s123456", password: "PlsLogin", role: "Student" }
 
     let teacherExample;
-    teacherExample ={userName: "Teacher" + Math.ceil(Math.max(Math.random()*99, 10)), password: "PlsLogin", role: "Teacher" }
+    teacherExample ={userName: "Teacher99", password: "PlsLogin", role: "Teacher" }
 
 
 

@@ -8,6 +8,10 @@ const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080
 const Loginstates = {LOGGING_IN:"Loading", LOGGEDOUT:"Logout", LOGGED_IN:"LoggedIn"};
 export default class UserStore {
 
+    state = Loginstates.LOGGEDOUT;
+    token = null;
+    logindata = {username:"",password:""};
+
     users = [
         "loading Users..."
     ];
@@ -21,36 +25,46 @@ export default class UserStore {
     }
 
     fetchUser(user) {
-        const token = tokenStore.token;
-
-        return fetch(baseUrl + "rest/users/" + user, {
+        this.state=Loginstates.LOGGING_IN;
+        fetch(baseUrl + "rest/users",{
+            method:"POST",
+            body:JSON.stringify(this.logindata),
             headers: {
-                Authorization: token
+                'Content-Type': 'application/json'
             }
         }).then(
-            (response) => response.json().then(
-                (json) => {
-                    runInAction(() => this.Users = json);
-                    return json;
+            (response)=> {
+                if (!response.ok) {
+                    console.log(response);
+                    this.state = Loginstates.LOGGEDOUT;
+                } else {
+                    response.text().then(
+                        (token)=> {
+                            console.log("Got Token: " + token)
+                            this.token=token;
+                            localStorage.setItem("loginToken",token);
+                            this.state=Loginstates.LOGGED_IN;
+                        }
+                    )
                 }
-            ).catch((e) => {
-                console.error(e)
-            })
-        )
+            }
+        ).catch(()=>this.state = Loginstates.LOGGEDOUT )
     }
 
 
 
-    postUser(user) {
+
+
+ postUser(user) {
         const token = tokenStore.token;
-        fetch(baseUrl + "rest/users/" + user, {
+        fetch(baseUrl + "rest/users" + user, {
             method: "POST",
             headers: {
                 Authorization: token,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(UserName),
+            body: JSON.stringify(user),
         }).then(
             (response) => response.json().then(
                 (json) => runInAction(() => this.users.push(json))
