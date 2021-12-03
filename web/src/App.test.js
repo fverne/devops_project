@@ -18,15 +18,42 @@ afterEach(cleanup);
 //Tror at den fetcher data når den skal vise courses, men da den
 //ikke kan hente courses lige nu, så står der bare "loading courses".
 //Når den kan fetche rigtig data, kan vi teste på den i stedet for forhåbentlig
+
 test("fetches and display data", async () => {
-    const url = "/courses";
+    const url = "https://godinside.devops.diplomportal.dk/?#/courses";
     const { getByTestId } = render(<CoursePaper url = {url}/>);
 
     expect(getByTestId("loading")).toHaveTextContent("Loading courses...");
 })
 
+test("renders the correct content of home page", () =>{
+    const root = document.createElement("div");
+    ReactDOM.render(<Home />, root);
 
+    expect(root.querySelector("h1").textContent).toBe("Home");
+})
 
+test("renders the button for adding courses", () =>{
+    const root = document.createElement("div");
+    ReactDOM.render(<Courses />, root);
+
+    expect(root.querySelector("Button").textContent).toBe(" Add Test Course");
+})
+
+/*
+test("loads site", async() =>{
+    render(<Home />)
+
+    fireEvent.click(screen.getByTestId("menutest"))
+
+    fireEvent.click(screen.getByTestId("hometest"))
+
+    const items = await screen.findAllByText("Home")
+    expect(items).toHaveLength(1)
+
+})
+
+ */
 /*
 // Checks if navigation works, by switching page from Home to something else
 test('Home button Checker', async () => {
@@ -57,36 +84,11 @@ test('Silly test',()=>{
 
  */
 
-//Den her test pass'er.
-test("renders the correct content of home page", () =>{
-    const root = document.createElement("div");
-    ReactDOM.render(<Home />, root);
 
-    expect(root.querySelector("h1").textContent).toBe("Home");
-})
 
-//Pass'er vist også???
-test("renders the button for adding courses", () =>{
-    const root = document.createElement("div");
-    ReactDOM.render(<Courses />, root);
 
-    expect(root.querySelector("Button").textContent).toBe(" Add Test Course");
-})
 
-/*
-test("loads site", async() =>{
-    render(<Home />)
 
-    fireEvent.click(screen.getByTestId("menutest"))
-
-    fireEvent.click(screen.getByTestId("hometest"))
-
-    const items = await screen.findAllByText("Home")
-    expect(items).toHaveLength(1)
-
-})
-
- */
 
 
 
