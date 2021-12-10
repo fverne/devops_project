@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 
 //DEPLOY ME!
+//DEPLOY ME TOO!
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
